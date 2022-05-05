@@ -6,7 +6,7 @@ pipeline {
     }
 	
     stages {
-        stage ('Compile Stage FrikiTeam') {
+        stage ('Compile Stage') {
 
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage ('Testing Stage FrikiTeam') {
+        stage ('Testing Stage') {
 
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-        stage ('package Stage FrikiTeam') {
+        stage ('package Stage') {
             steps {
                 withMaven(maven : 'MAVEN_3_6_3') {
                     bat 'mvn package'
