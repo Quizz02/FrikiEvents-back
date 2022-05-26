@@ -26,7 +26,7 @@ public class RateAnEventStep {
         resource.setPrice(25.0);
         resource.setQuantity(3500);
         resource.setPlaceId(1L);
-        event = restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
+//        event = restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
     }
 
     @When("fill in the qualification data requested")

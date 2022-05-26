@@ -27,8 +27,8 @@ public class GetDescriptionOfAnEventSteps {
         resource.setQuantity(3500);
         resource.setPlaceId(1L);
 
-        event = restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
-
+//        event = restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
+//        restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
     }
 
     private void createPlace() {
@@ -68,9 +68,14 @@ public class GetDescriptionOfAnEventSteps {
 
     private void createOrganizer() {
         try {
-            restTemplate.getForObject(url + "organizers/1", OrganizerResource.class);
+            restTemplate.getForObject(url + "organizers/4", OrganizerResource.class);
         } catch (Exception e) {
             SaveOrganizerResource organizer = new SaveOrganizerResource();
+            organizer.setEmail("organizer1@gmail.com");
+            organizer.setPassword("string");
+            organizer.setFirstName("usuarioorganizador");
+            organizer.setLastName("si");
+            organizer.setLogo("string");
             organizer.setDescription("I'm organizer");
             restTemplate.postForObject(url + "organizers", organizer, OrganizerResource.class);
         }
@@ -78,12 +83,14 @@ public class GetDescriptionOfAnEventSteps {
 
     @When("choose one of the events")
     public void chooseAnEvent() {
-        assert (event != null);
+//        assert (event != null);
+        assert (resource != null);
     }
 
     @Then("basic information about the event is appreciated")
     public void getDescription() {
-        System.out.println(event.getInformation());
+//        System.out.println(event.getInformation());
+        System.out.println(resource.getInformation());
     }
 
 }
