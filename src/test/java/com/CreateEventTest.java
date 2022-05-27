@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(JUnit4.class)
 public class CreateEventTest {
+//    ola
 //    private static WebDriver driver = null;
 //    private Map<String, Object> vars;
 //    JavascriptExecutor js;
