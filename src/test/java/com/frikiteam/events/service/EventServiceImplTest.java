@@ -386,4 +386,48 @@ class EventServiceImplTest {
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Resource Event not found for Id with value 1");
     }
+
+    @Test
+    void verifyDescriptionIsAssignedToEvent() {
+        // Arrange
+        long organizerId = 1;
+        Organizer organizer = new Organizer();
+        long eventId = 1;
+        Event event = new Event();
+        String description = "description";
+        List<Event> eventList = new ArrayList<>();
+
+        // Action
+        organizer.setId(organizerId);
+        event.setId(eventId);
+        event.setInformation(description);
+        eventList.add(event);
+        organizer.setEvents(eventList);
+
+        // Assert
+        assertEquals(description, organizer.getEvents().get(0).getInformation());
+    }
+
+    @Test
+    void verifyNumberOfTicketsSoldIsNotGreaterThanNumberOfEntries() {
+        // Arrange
+        long organizerId = 1;
+        Organizer organizer = new Organizer();
+        long eventId = 1;
+        Event event = new Event();
+        List<Event> eventList = new ArrayList<>();
+
+        // Action
+        event.setSold(9);
+        event.setQuantity(10);
+        organizer.setId(organizerId);
+        event.setId(eventId);
+        eventList.add(event);
+        organizer.setEvents(eventList);
+
+        // Assert
+        assertThat(organizer.getEvents().get(0).getSold())
+                .isLessThanOrEqualTo(organizer.getEvents().get(0).getQuantity());
+    }
+
 }
