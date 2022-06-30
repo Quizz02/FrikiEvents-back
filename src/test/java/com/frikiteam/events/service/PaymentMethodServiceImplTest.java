@@ -38,148 +38,148 @@ public class PaymentMethodServiceImplTest {
         }
     }
 
-    @Test
-    void whenGetPaymentMethodByIdWithValidIdThenReturnsPaymentMethod(){
-
-        //Arrange
-        Long id = 1L;
-        PaymentMethod paymentMethod = new PaymentMethod();
-
-        paymentMethod.setId(id);
-        paymentMethod.setName("Paula");
-
-
-        when(paymentMethodRepository.findById(id)).thenReturn(Optional.of(paymentMethod));
-
-        //Act
-        PaymentMethod paymentMethod1 = paymentMethodService.getPaymentMethodById(id);
-
-        //Assert
-        assertThat(paymentMethod1.getId()).isEqualTo(id);
-    }
-
-    @Test
-    public void whenGetPaymentMethodByIdWithInvalidIdThenReturnsResourceNotFoundException() {
-        // Arrange
-        Long id = 1L;
-
-        String template = "Resource %s not found for %s with value %s";
-        when(paymentMethodRepository.findById(id))
-                .thenReturn(Optional.empty());
-        String expectedMessage = String.format(template, "PaymentMethod", "id", id);
-
-        // ACt
-        Throwable exception = catchThrowable(() -> { // capturing exception
-            PaymentMethod paymentMethod1  = paymentMethodService.getPaymentMethodById(id);
-        });
-
-        // Assert
-        assertThat(exception)
-                .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage(expectedMessage);
-    }
-
-    @Test
-    public void whenDeletePaymentMethodByIdWithInvalidIdThenReturnsResourceNotFoundException() {
-        // Arrange
-        Long id = 1L;
-        String template = "Resource %s not found for %s with value %s";
-        when(paymentMethodRepository.findById(id))
-                .thenReturn(Optional.empty());
-        String expectedMessage = String.format(template, "PaymentMethod", "id", id);
-
-        // ACt
-        Throwable exception = catchThrowable(() -> { // capturing exception
-            ResponseEntity<?> result = paymentMethodService.deletePaymentMethod(id);
-        });
-
-        // Assert
-        assertThat(exception)
-                .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage(expectedMessage);
-    }
-
-    @Test
-    public void whenDeletePaymentMethodByIdWithValidIdThenReturnsResponseEntityOk() {
-        //Arrange
-        Long id = 1L;
-        PaymentMethod paymentMethod = new PaymentMethod();
-
-        paymentMethod.setId(id);
-        paymentMethod.setName("Paula");
-
-        when(paymentMethodRepository.findById(id)).thenReturn(Optional.of(paymentMethod));
-
-        //Act
-        ResponseEntity<?> result = paymentMethodService.deletePaymentMethod(id);
-
-        //Assert
-        assertThat(result).isEqualTo(ResponseEntity.ok().build());
-    }
-
-    @Test
-    public void whenSavePaymentMethodWithValidOrganizerReturnsPaymentMethod() {
-        //Arrange
-        Long id = 1L;
-        PaymentMethod paymentMethod = new PaymentMethod();
-
-        paymentMethod.setId(id);
-        paymentMethod.setName("Paula");
-
-        when(paymentMethodRepository.save(paymentMethod)).thenReturn(paymentMethod);
-        // ACt
-        PaymentMethod result = paymentMethodService.savePaymentMethod(paymentMethod);
-        // Assert
-        assertThat(result).isEqualTo(paymentMethod);
-    }
-
-    @Test
-    public void whenUpdatePaymentMethodWithValidIdThenReturnsPaymentMethodUpdated() {
-        // Arrange
-        long id = 1, id1 = 13L;
-
-        PaymentMethod updatePaymentMethod = new PaymentMethod();
-        PaymentMethod oldPaymentMethod = new PaymentMethod();
-
-        updatePaymentMethod.setId(id);
-        updatePaymentMethod.setName("Paulo");
-
-        oldPaymentMethod.setId(id);
-        oldPaymentMethod.setName("Paula");
-
-        when(paymentMethodRepository.findById(id)).thenReturn(Optional.of(oldPaymentMethod));
-        when(paymentMethodRepository.save(updatePaymentMethod)).thenReturn(updatePaymentMethod);
-
-        // ACt
-        PaymentMethod paymentMethod = paymentMethodService.updatePaymentMethod(id, updatePaymentMethod);
-
-        // Assert
-        assertThat(paymentMethod).isEqualTo(updatePaymentMethod);
-    }
-
-    @Test
-    public void whenUpdatePaymentMethodrWithInvalidIdThenReturnsResourceNotFoundException() {
-        // Arrange
-        long id = 1, id1 = 13L;
-
-        PaymentMethod updatePaymentMethod = new PaymentMethod();
-
-        updatePaymentMethod.setId(id);
-        updatePaymentMethod.setName("Paulo");
-
-        when(paymentMethodRepository.findById(id)).thenReturn(Optional.empty());
-        when(paymentMethodRepository.save(updatePaymentMethod)).thenReturn(updatePaymentMethod);
-
-        String expectedMessage = String.format("Resource %s not found for %s with value %s", "PaymentMethod", "id", id);
-
-        // Act
-        Throwable exception = catchThrowable(() -> { // capturing exception
-            PaymentMethod paymentMethod = paymentMethodService.updatePaymentMethod(id, updatePaymentMethod);
-        });
-
-        // Assert
-        assertThat(exception)
-                .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage(expectedMessage);
-    }
+//    @Test
+//    void whenGetPaymentMethodByIdWithValidIdThenReturnsPaymentMethod(){
+//
+//        //Arrange
+//        Long id = 1L;
+//        PaymentMethod paymentMethod = new PaymentMethod();
+//
+//        paymentMethod.setId(id);
+//        paymentMethod.setName("Paula");
+//
+//
+//        when(paymentMethodRepository.findById(id)).thenReturn(Optional.of(paymentMethod));
+//
+//        //Act
+//        PaymentMethod paymentMethod1 = paymentMethodService.getPaymentMethodById(id);
+//
+//        //Assert
+//        assertThat(paymentMethod1.getId()).isEqualTo(id);
+//    }
+//
+//    @Test
+//    public void whenGetPaymentMethodByIdWithInvalidIdThenReturnsResourceNotFoundException() {
+//        // Arrange
+//        Long id = 1L;
+//
+//        String template = "Resource %s not found for %s with value %s";
+//        when(paymentMethodRepository.findById(id))
+//                .thenReturn(Optional.empty());
+//        String expectedMessage = String.format(template, "PaymentMethod", "id", id);
+//
+//        // ACt
+//        Throwable exception = catchThrowable(() -> { // capturing exception
+//            PaymentMethod paymentMethod1  = paymentMethodService.getPaymentMethodById(id);
+//        });
+//
+//        // Assert
+//        assertThat(exception)
+//                .isInstanceOf(ResourceNotFoundException.class)
+//                .hasMessage(expectedMessage);
+//    }
+//
+//    @Test
+//    public void whenDeletePaymentMethodByIdWithInvalidIdThenReturnsResourceNotFoundException() {
+//        // Arrange
+//        Long id = 1L;
+//        String template = "Resource %s not found for %s with value %s";
+//        when(paymentMethodRepository.findById(id))
+//                .thenReturn(Optional.empty());
+//        String expectedMessage = String.format(template, "PaymentMethod", "id", id);
+//
+//        // ACt
+//        Throwable exception = catchThrowable(() -> { // capturing exception
+//            ResponseEntity<?> result = paymentMethodService.deletePaymentMethod(id);
+//        });
+//
+//        // Assert
+//        assertThat(exception)
+//                .isInstanceOf(ResourceNotFoundException.class)
+//                .hasMessage(expectedMessage);
+//    }
+//
+//    @Test
+//    public void whenDeletePaymentMethodByIdWithValidIdThenReturnsResponseEntityOk() {
+//        //Arrange
+//        Long id = 1L;
+//        PaymentMethod paymentMethod = new PaymentMethod();
+//
+//        paymentMethod.setId(id);
+//        paymentMethod.setName("Paula");
+//
+//        when(paymentMethodRepository.findById(id)).thenReturn(Optional.of(paymentMethod));
+//
+//        //Act
+//        ResponseEntity<?> result = paymentMethodService.deletePaymentMethod(id);
+//
+//        //Assert
+//        assertThat(result).isEqualTo(ResponseEntity.ok().build());
+//    }
+//
+//    @Test
+//    public void whenSavePaymentMethodWithValidOrganizerReturnsPaymentMethod() {
+//        //Arrange
+//        Long id = 1L;
+//        PaymentMethod paymentMethod = new PaymentMethod();
+//
+//        paymentMethod.setId(id);
+//        paymentMethod.setName("Paula");
+//
+//        when(paymentMethodRepository.save(paymentMethod)).thenReturn(paymentMethod);
+//        // ACt
+//        PaymentMethod result = paymentMethodService.savePaymentMethod(paymentMethod);
+//        // Assert
+//        assertThat(result).isEqualTo(paymentMethod);
+//    }
+//
+//    @Test
+//    public void whenUpdatePaymentMethodWithValidIdThenReturnsPaymentMethodUpdated() {
+//        // Arrange
+//        long id = 1, id1 = 13L;
+//
+//        PaymentMethod updatePaymentMethod = new PaymentMethod();
+//        PaymentMethod oldPaymentMethod = new PaymentMethod();
+//
+//        updatePaymentMethod.setId(id);
+//        updatePaymentMethod.setName("Paulo");
+//
+//        oldPaymentMethod.setId(id);
+//        oldPaymentMethod.setName("Paula");
+//
+//        when(paymentMethodRepository.findById(id)).thenReturn(Optional.of(oldPaymentMethod));
+//        when(paymentMethodRepository.save(updatePaymentMethod)).thenReturn(updatePaymentMethod);
+//
+//        // ACt
+//        PaymentMethod paymentMethod = paymentMethodService.updatePaymentMethod(id, updatePaymentMethod);
+//
+//        // Assert
+//        assertThat(paymentMethod).isEqualTo(updatePaymentMethod);
+//    }
+//
+//    @Test
+//    public void whenUpdatePaymentMethodrWithInvalidIdThenReturnsResourceNotFoundException() {
+//        // Arrange
+//        long id = 1, id1 = 13L;
+//
+//        PaymentMethod updatePaymentMethod = new PaymentMethod();
+//
+//        updatePaymentMethod.setId(id);
+//        updatePaymentMethod.setName("Paulo");
+//
+//        when(paymentMethodRepository.findById(id)).thenReturn(Optional.empty());
+//        when(paymentMethodRepository.save(updatePaymentMethod)).thenReturn(updatePaymentMethod);
+//
+//        String expectedMessage = String.format("Resource %s not found for %s with value %s", "PaymentMethod", "id", id);
+//
+//        // Act
+//        Throwable exception = catchThrowable(() -> { // capturing exception
+//            PaymentMethod paymentMethod = paymentMethodService.updatePaymentMethod(id, updatePaymentMethod);
+//        });
+//
+//        // Assert
+//        assertThat(exception)
+//                .isInstanceOf(ResourceNotFoundException.class)
+//                .hasMessage(expectedMessage);
+//    }
 }
